@@ -78,35 +78,37 @@ console.log(`Expect value of d to equal 69. Received:  ${d}`)
 
 // For a more applicable problem
 const status = {
-  loadingA: false,
-  loadingB: false
+  loading: false
+}
+
+
+function loadingComponent(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-function loadingComponent(ms) {
+ // duplicate function for the sake of clarity
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function loadA() {
   console.log("Start loadA");
-  status.loadingA = true;
+  status.loading = true;
   await loadingComponent(Math.floor(Math.random() * 3000));
-  status.loadingA = false;
+  status.loading = false;
   console.log("Finish loadA");
 }
 
 async function loadB() {
   console.log("Start loadB");
-  status.loadingB = true;
+  status.loading = true;
   await loadingComponent(Math.floor(Math.random() * 3000));
-  status.loadingB = false;
+  status.loading = false;
   console.log("Finish loadB");
 }
 
 function allowUserInteraction(){
-  return !status.loadingA && !status.loadingB
+  return !status.loading
 }
 async function waitToFinishLoading(){
   console.log("wait for finish loading");
@@ -118,6 +120,42 @@ async function waitToFinishLoading(){
 }
 loadB();
 loadA();
+waitToFinishLoading();
+
+const status2 = {
+  loadingC: false,
+  loadingD: false
+}
+
+async function loadC() {
+  console.log("Start loadC");
+  status2.loadingC = true;
+  await loadingComponent(Math.floor(Math.random() * 3000));
+  status2.loadingC = false;
+  console.log("Finish loadC");
+}
+
+async function loadD() {
+  console.log("Start loadD");
+  status.loadingD = true;
+  await loadingComponent(Math.floor(Math.random() * 3000));
+  status.loadingD = false;
+  console.log("Finish loadD");
+}
+
+function allowUserInteraction2(){
+  return !status.loadingC && !status.loadingD
+}
+async function waitToFinishLoading2(){
+  console.log("wait for finish loading 2");
+  while(!allowUserInteraction2()){
+    await sleep(500)
+  }
+  console.log("Allowing user interaction 2");
+
+}
+loadC();
+loadD();
 waitToFinishLoading();
 
 
