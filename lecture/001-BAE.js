@@ -15,7 +15,6 @@ const {name: dogName = "unknown", age: year = 0} = dog
 
 const dogName = dog.name ? dog.name : "unknown";
 const year = dog.age ? dog.age : 0;
-// Destructuring
-console.log(Object.keys(dog))
+
 
 
