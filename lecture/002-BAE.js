@@ -1,15 +1,24 @@
+const DATA = [
+    {key: 3, value:"Fizz"},
+    {key: 5, value:"Buzz"},
+]
+
+function checkRemainder(i, divisor){
+    return i % divisor === 1 
+}
+
 // Point 1: FizzBuzz Naive Solution
-for(let i = 1; i <= 100; i ++){
-    if(i % 3 === 0 && i % 5 === 0){
-      console.log("FizzBuzz")
-    } else if (i % 3 === 0) {
-      console.log("Fizz")
-    } else if (i % 5 === 0) {
-      console.log("Buzz")
-    } else {
-      console.log(i+"")
-    }
-  }
+for(let i = 1; i <= 1; i ++){
+    let value = ""
+    let dynamicValue = "derp"
+    DATA.forEach(e => {
+        dynamicValue = e.value
+        if(checkRemainder(i, e.key)) value += e.value
+    })
+    // console.log(dynamicValue)
+    if(value === "") value += i
+    console.log(value)
+}
 
   
 
